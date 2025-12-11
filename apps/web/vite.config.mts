@@ -1,10 +1,22 @@
 /// <reference types='vitest' />
 import { defineConfig } from 'vite';
+import { resolve } from 'path';
 import react from '@vitejs/plugin-react';
+import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 
 export default defineConfig(() => ({
   root: import.meta.dirname,
   cacheDir: '../../node_modules/.vite/apps/heelix',
+  plugins: [react(), nxViteTsPaths()],
+  resolve: {
+    alias: {
+      'react-native': 'react-native-web',
+      '@heelix/shared': resolve(__dirname, '../../shared/src/index.ts'),
+    },
+  },
+  define: {
+    global: 'window', // Fixes some RN-web compatibility issues
+  },
   server: {
     port: 4200,
     host: 'localhost',
@@ -13,7 +25,6 @@ export default defineConfig(() => ({
     port: 4300,
     host: 'localhost',
   },
-  plugins: [react()],
   // Uncomment this if you are using workers.
   // worker: {
   //  plugins: [],
@@ -27,7 +38,7 @@ export default defineConfig(() => ({
     },
   },
   test: {
-    name: '@heelix/heelix',
+    name: '@heelix',
     watch: false,
     globals: true,
     environment: 'jsdom',
