@@ -2,50 +2,142 @@
 
 <a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is ready ✨.
+A react universal app with monorepo workspace built with [Nx](https://nx.dev), featuring cross-platform applications for web and mobile using Expo and Expo Web
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/tutorials/react-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+## Project Structure
 
-## Run tasks
+This workspace contains:
 
-To run the dev server for your app, use:
+- **`apps/web`** - React web application (React 19, TypeScript, Tailwind CSS, Vite)
+- **`apps/mobile`** - Expo/React Native mobile application
+- **`shared`** - Shared library with reusable components and features (Dashboard, FactorAnalysis, Navigation, etc.)
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or higher)
+- npm or yarn
+
+### Installation
 
 ```sh
-npx nx serve heelix
+npm install
+```
+
+## Run Tasks
+
+### Web Application
+
+To run the web app development server:
+
+```sh
+npx nx serve web
 ```
 
 To create a production bundle:
 
 ```sh
-npx nx build heelix
+npx nx build web
 ```
 
-To see all available targets to run for a project, run:
+To preview the production build:
 
 ```sh
-npx nx show project heelix
+npx nx preview web
+```
+
+### Mobile Application
+
+To start the Expo development server:
+
+```sh
+npx nx start mobile
+```
+
+To run on iOS:
+
+```sh
+npx nx run-ios mobile
+```
+
+To run on Android:
+
+```sh
+npx nx run-android mobile
+```
+
+### Shared Library
+
+To build the shared library:
+
+```sh
+npx nx build shared
+```
+
+### Testing
+
+Run unit tests:
+
+```sh
+npx nx test web
+npx nx test shared
+```
+
+Run linting:
+
+```sh
+npx nx lint web
+npx nx lint mobile
+npx nx lint shared
+```
+
+### Project Information
+
+To see all available targets for a project:
+
+```sh
+npx nx show project web
+npx nx show project mobile
+npx nx show project shared
+```
+
+To visualize the project dependency graph:
+
+```sh
+npx nx graph
 ```
 
 These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
 
 [More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 
-## Add new projects
+## Add New Projects
 
 While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
 
-Use the plugin's generator to create new projects.
-
-To generate a new application, use:
+### Generate a New React Application
 
 ```sh
-npx nx g @nx/react:app demo
+npx nx g @nx/react:app my-app
 ```
 
-To generate a new library, use:
+### Generate a New React Library
 
 ```sh
-npx nx g @nx/react:lib mylib
+npx nx g @nx/react:lib my-lib
+```
+
+### Generate a New Component
+
+```sh
+npx nx g @nx/react:component MyComponent --project=web --style=tailwind
+```
+
+### Generate a New Expo Application
+
+```sh
+npx nx g @nx/expo:application my-mobile-app
 ```
 
 You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
