@@ -12,6 +12,54 @@ This workspace contains:
 - **`apps/mobile`** - Expo/React Native mobile application
 - **`shared`** - Shared library with reusable components and features (Dashboard, FactorAnalysis, Navigation, etc.)
 
+## Architecture Decision
+
+### Why This Stack?
+
+This architecture was chosen to enable true code sharing across web and mobile platforms while providing a modern, maintainable development experience. For a team primarily experienced with Angular, adopting React represents an exciting opportunity to expand our technical expertise.
+
+### Expo (React Native) for Mobile
+
+**Pros:**
+- **Rapid Development**: Expo provides a managed workflow with over-the-air updates, eliminating the need for native builds during development
+- **Rich Ecosystem**: Access to a comprehensive set of pre-built native modules and APIs through Expo SDK
+- **Cross-Platform**: Write once, run on both iOS and Android with native performance
+- **Developer Experience**: Hot reloading, excellent debugging tools, and simplified build process
+- **Code Sharing**: Share business logic, components, and utilities between web and mobile through the shared library
+- **Active Community**: Large, vibrant community with extensive documentation and support
+
+**Cons:**
+- **Native Module Limitations**: Some advanced native features may require ejecting from the managed workflow (though this is becoming less common)
+- **Bundle Size**: Can be larger than pure native apps, though optimization techniques help mitigate this
+- **Learning Curve**: Team members familiar with Angular will need to learn React patterns and React Native specifics
+- **Platform-Specific Code**: Occasionally requires platform-specific implementations for certain features
+
+### Expo Web (React Native Web) for Web
+
+**Pros:**
+- **Maximum Code Reuse**: Share React Native components directly on the web, reducing duplication
+- **Consistent UI/UX**: Maintain visual and behavioral consistency across web and mobile platforms
+- **Single Codebase**: Write components once in React Native and render them on both native and web
+- **Modern Web Standards**: Leverages modern web APIs and React's virtual DOM for optimal performance
+- **SEO Friendly**: Can be configured for server-side rendering when needed
+- **Progressive Enhancement**: Works well with modern web features and can be enhanced for web-specific optimizations
+
+**Cons:**
+- **Performance Considerations**: React Native Web adds abstraction layers that can impact web performance compared to pure React web apps
+- **Web-Specific Features**: Some web-specific optimizations and features may require additional configuration or workarounds
+- **Bundle Size**: May result in larger bundle sizes compared to purpose-built web applications
+- **Styling Limitations**: Some React Native styling patterns don't translate perfectly to web CSS, requiring platform-specific styling
+- **Learning Curve**: Developers need to understand both React Native and web-specific considerations
+
+### Why This Architecture Works for Us
+
+1. **Team Growth**: As a team of Angular developers, learning React provides valuable cross-framework experience and expands our skill set
+2. **Code Efficiency**: Sharing components and business logic between platforms reduces maintenance overhead and development time
+3. **Consistent Experience**: Users get a cohesive experience across web and mobile platforms
+4. **Future-Proof**: React and React Native have strong industry adoption and long-term support
+5. **Monorepo Benefits**: Nx enables efficient code sharing, dependency management, and build optimization across the entire workspace
+6. **Flexibility**: The architecture allows for platform-specific optimizations when needed while maintaining maximum code reuse
+
 ## Getting Started
 
 ### Prerequisites
